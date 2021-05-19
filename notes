@@ -1,0 +1,50 @@
+1. create docker container that can use boto
+    - able to pull and push data from and to S3 buckets
+2. not supposed to put AWS credentials in container
+    - create IAM user role in the EC2 instance that is supposed to run the docker container.
+    - if instance has the right IAM role, it will directly look at the IAM role.
+    - provide ENV variables 
+    - docker run ... -e ...
+
+- image should not contain IAM credentials
+
+
+
+- simple NN
+
+- access GPU within docker container
+
+- create tutorial for each step
+
+---
+
+Questions:
+- Don't know how to pull docker images from https://github.com/aws/deep-learning-containers/blob/master/available_images.md
+    - ERROR: no basic auth credentials.
+    - Is it safe to include my AWS secret key in the EC2 instance?
+
+
+---
+
+docker build -t cleonimage .
+docker run simple_nn:0.1.0 python3 neuralNetwork.py
+
+docker run \
+-it \
+--name cleoncontainer \
+-v /home/ubuntu/cleon-docker-test/data:/home/docker-test/data \
+-v /home/ubuntu/cleon-docker-test/output:/home/docker-test/output \
+cleonimage \
+bash
+
+---
+
+- create 2 docker containers
+    - container 1: generate data, push to s3
+    - container 2: pull data from s3, train model, push model to s3
+    - container 3: pull trained model from s3, pull validation data from s3, do prediction, save prediction in s3
+    - use env variables for anything s3
+- recreate instance
+    - install cuda toolkit 11 in instance
+    - install cudnn 8.1 in instance
+    - install tensorflow==2.4.1
