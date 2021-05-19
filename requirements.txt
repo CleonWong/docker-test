@@ -2,4 +2,4 @@ jsonref
 numpy
 pandas
 boto3
-tensorflow==2.4.1
+tensorflow
