@@ -1,0 +1,23 @@
+{
+    "rseed": 1234,
+    "data": {
+        "data_dir": "../data",
+        "train_csv_filename": "train_data.csv",
+        "test_csv_filename": "test_data.csv",
+        "train_n_samples": 100,
+        "test_n_samples": 20,
+        "train_split": 0.8,
+        "val_split": 0.2
+    },
+    "model": {
+        "intermediate_neurons": 10,
+        "learning_rate": 0.001,
+        "batch_size": 50,
+        "epochs": 100
+    },
+    "predictions": {
+        "predictions_dir": "../output",
+        "predictions_csv_filename": "predictions.csv"
+    },
+    "s3_bucket": "cleon-docker-test"
+}
