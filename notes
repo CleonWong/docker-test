@@ -48,3 +48,16 @@ bash
     - install cuda toolkit 11 in instance
     - install cudnn 8.1 in instance
     - install tensorflow==2.4.1
+
+---
+
+FOR DATA IMAGE AND CONTAINER
+
+docker build -t data_image -f dockerfiles/dockerfile_data/Dockerfile .
+
+docker run \
+--name data_container \
+-e S3BUCKET=cleon-docker-test \
+-e S3BUCKET_FOLDER=data \
+data_image \
+python3 data_worker.py
