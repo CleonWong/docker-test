@@ -76,6 +76,19 @@ docker run \
 train_image \
 python3 train_worker.py
 
+3. FOR MODEL PREDICTION CONTAINER
+---------------------------------
+
+docker build -t pred_image -f dockerfiles/dockerfile_pred/Dockerfile .
+
+docker run \
+--name pred_container \
+-e S3BUCKET=cleon-docker-test \
+-e S3BUCKET_DATA_FOLDER=data \
+-e S3BUCKET_SAVEDMODELS_FOLDER=output/saved_models \
+-e S3BUCKET_PRED_FOLDER=output/predictions \
+pred_image \
+python3 pred_worker.py
 
 ---
 

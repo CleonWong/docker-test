@@ -1,0 +1,14 @@
+{
+    "data": {
+        "data_dir": "../data",
+        "test_csv_filename": "test_data.csv"
+    },
+    "model": {
+        "saved_models_dir": "../output/saved_models",
+        "model_name": "my_model.h5"
+    },
+    "predictions": {
+        "predictions_dir": "../output/predictions",
+        "predictions_csv_filename": "predictions.csv"
+    }
+}
