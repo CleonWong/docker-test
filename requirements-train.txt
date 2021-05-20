@@ -1,0 +1,4 @@
+jsonref
+numpy
+pandas
+boto3

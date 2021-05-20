@@ -2,9 +2,5 @@
     "rseed": 1234,
     "data_dir": "../data",
     "train_csv_filename": "train_data.csv",
-    "test_csv_filename": "test_data.csv",
-    "train_n_samples": 100,
-    "test_n_samples": 20,
-    "train_split": 0.8,
-    "val_split": 0.2
+    "test_csv_filename": "test_data.csv"
 }

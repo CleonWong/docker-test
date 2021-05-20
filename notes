@@ -51,7 +51,8 @@ bash
 
 ---
 
-FOR DATA IMAGE AND CONTAINER
+1. FOR DATA IMAGE AND CONTAINER
+-------------------------------
 
 docker build -t data_image -f dockerfiles/dockerfile_data/Dockerfile .
 
@@ -61,3 +62,20 @@ docker run \
 -e S3BUCKET_FOLDER=data \
 data_image \
 python3 data_worker.py
+
+2. FOR MODEL BUILDING AND TRAINING CONTAINER
+--------------------------------------------
+
+docker build -t train_image -f dockerfiles/dockerfile_train/Dockerfile .
+
+docker run \
+--name train_container \
+-e S3BUCKET=cleon-docker-test \
+-e S3BUCKET_DOWNLOAD_FROM_FOLDER=data \
+-e S3BUCKET_UPLOAD_TO_FOLDER=output/saved_models \
+train_image \
+python3 train_worker.py
+
+
+---
+

@@ -2,14 +2,16 @@
 Worker function for generating data points and saving to S3 bucket.
 """
 
-import jsonref
+import sys
 import os
+import jsonref
 from modules.generateData import generate_data
 from modules.botoHelpers import upload_file
 
 config = jsonref.load(open("../config/config-data.json"))
 
 # ----------
+
 
 def main():
 
@@ -18,6 +20,7 @@ def main():
         s3_bucket_folder = os.environ["S3BUCKET_FOLDER"]
     except KeyError:
         print("Please set the environment variable 'S3BUCKET' and 'S3BUCKET_FOLDER.")
+        sys.exit(1)
 
     train_csv_path = os.path.join(
         config["data_dir"],
@@ -50,6 +53,7 @@ def main():
     )
 
     return
+
 
 # ----------
 
