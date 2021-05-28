@@ -1,0 +1,17 @@
+{
+    "rseed": 1234,
+    "data": {
+        "data_dir": "../data",
+        "train_csv_filename": "train_data.csv",
+        "train_split": 0.8,
+        "val_split": 0.2
+    },
+    "model": {
+        "saved_models_dir": "../output/saved_models",
+        "model_name": "my_model.h5",
+        "intermediate_neurons": 10,
+        "learning_rate": 0.001,
+        "batch_size": 50,
+        "epochs": 100
+    }
+}

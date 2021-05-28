@@ -48,3 +48,51 @@ bash
     - install cuda toolkit 11 in instance
     - install cudnn 8.1 in instance
     - install tensorflow==2.4.1
+
+---
+
+1. FOR DATA IMAGE AND CONTAINER
+-------------------------------
+
+docker build -t data_image -f dockerfiles/dockerfile_data/Dockerfile .
+
+docker run \
+--name data_container \
+-e S3BUCKET=cleon-docker-test \
+-e S3BUCKET_DATA_FOLDER=data \
+data_image \
+python3 data_worker.py
+
+2. FOR MODEL BUILDING AND TRAINING CONTAINER
+--------------------------------------------
+
+docker build -t train_image -f dockerfiles/dockerfile_train/Dockerfile .
+
+docker run \
+--gpus all \
+--name train_container \
+-e S3BUCKET=cleon-docker-test \
+-e S3BUCKET_DATA_FOLDER=data \
+-e S3BUCKET_SAVEDMODELS_FOLDER=output/saved_models \
+train_image \
+python3 train_worker.py
+
+3. FOR MODEL PREDICTION CONTAINER
+---------------------------------
+
+docker build -t pred_image -f dockerfiles/dockerfile_pred/Dockerfile .
+
+docker run \
+--gpus all \
+--name pred_container \
+-e S3BUCKET=cleon-docker-test \s
+-e S3BUCKET_DATA_FOLDER=data \
+-e S3BUCKET_SAVEDMODELS_FOLDER=output/saved_models \
+-e S3BUCKET_PRED_FOLDER=output/predictions \
+pred_image \
+python3 pred_worker.py
+
+---
+
+- start from python slim image and install tensorflow. 
+- nvidia docker, restart docker
