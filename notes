@@ -59,7 +59,7 @@ docker build -t data_image -f dockerfiles/dockerfile_data/Dockerfile .
 docker run \
 --name data_container \
 -e S3BUCKET=cleon-docker-test \
--e S3BUCKET_FOLDER=data \
+-e S3BUCKET_DATA_FOLDER=data \
 data_image \
 python3 data_worker.py
 
@@ -69,10 +69,11 @@ python3 data_worker.py
 docker build -t train_image -f dockerfiles/dockerfile_train/Dockerfile .
 
 docker run \
+--gpus all \
 --name train_container \
 -e S3BUCKET=cleon-docker-test \
--e S3BUCKET_DOWNLOAD_FROM_FOLDER=data \
--e S3BUCKET_UPLOAD_TO_FOLDER=output/saved_models \
+-e S3BUCKET_DATA_FOLDER=data \
+-e S3BUCKET_SAVEDMODELS_FOLDER=output/saved_models \
 train_image \
 python3 train_worker.py
 
@@ -82,8 +83,9 @@ python3 train_worker.py
 docker build -t pred_image -f dockerfiles/dockerfile_pred/Dockerfile .
 
 docker run \
+--gpus all \
 --name pred_container \
--e S3BUCKET=cleon-docker-test \
+-e S3BUCKET=cleon-docker-test \s
 -e S3BUCKET_DATA_FOLDER=data \
 -e S3BUCKET_SAVEDMODELS_FOLDER=output/saved_models \
 -e S3BUCKET_PRED_FOLDER=output/predictions \
@@ -92,3 +94,5 @@ python3 pred_worker.py
 
 ---
 
+- start from python slim image and install tensorflow. 
+- nvidia docker, restart docker

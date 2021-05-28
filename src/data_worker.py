@@ -17,9 +17,11 @@ def main():
 
     try:
         s3_bucket = os.environ["S3BUCKET"]
-        s3_bucket_folder = os.environ["S3BUCKET_FOLDER"]
+        s3_bucket_folder = os.environ["S3BUCKET_DATA_FOLDER"]
     except KeyError:
-        print("Please set the environment variable 'S3BUCKET' and 'S3BUCKET_FOLDER.")
+        print(
+            "Please set the environment variable 'S3BUCKET' and 'S3BUCKET_DATA_FOLDER."
+        )
         sys.exit(1)
 
     train_csv_path = os.path.join(

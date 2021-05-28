@@ -23,13 +23,13 @@ def main():
 
     try:
         s3_bucket = os.environ["S3BUCKET"]
-        s3_bucket_download_from_folder = os.environ["S3BUCKET_DOWNLOAD_FROM_FOLDER"]
-        s3_bucket_upload_to_folder = os.environ["S3BUCKET_UPLOAD_TO_FOLDER"]
+        s3_bucket_data_folder = os.environ["S3BUCKET_DATA_FOLDER"]
+        s3_bucket_savedmodels_folder = os.environ["S3BUCKET_SAVEDMODELS_FOLDER"]
     except KeyError:
         print(
             (
                 "Please set the environment variables 'S3BUCKET',"
-                "'S3BUCKET_DOWNLOAD_FROM_FOLDER'. and 'S3BUCKET_UPLOAD_TO_FOLDER'."
+                "'S3BUCKET_DATA_FOLDER'. and 'S3BUCKET_SAVEDMODELS_FOLDER'."
             )
         )
         sys.exit(1)
@@ -40,7 +40,7 @@ def main():
     # Download data/train.csv and data/test.csv from S3 bucket into local ../data folder.
     _ = download_all_objs_in_folder(
         bucket=s3_bucket,
-        bucket_folder=s3_bucket_download_from_folder,
+        bucket_folder=s3_bucket_data_folder,
         target_dir=config_data["data_dir"],
     )
 
@@ -106,7 +106,7 @@ def main():
     upload_file(
         file_name=saved_model_path,
         bucket=s3_bucket,
-        bucket_folder=s3_bucket_upload_to_folder,
+        bucket_folder=s3_bucket_savedmodels_folder,
     )
 
     return

@@ -1,5 +1,6 @@
 FROM python:3.9-slim-buster
 
+RUN pip3 install --upgrade pip
 # RUN pip3 install awscli --upgrade
 
 RUN mkdir -p /home/docker-test

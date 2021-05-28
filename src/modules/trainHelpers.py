@@ -64,6 +64,7 @@ def build_model(intermediate_neurons=10):
 
 def train_model(model, learning_rate, train_ds, val_ds, epochs):
 
+    # with tf.device("GPU:0"):
     model.compile(
         loss=tf.losses.MeanSquaredError(),
         optimizer=tf.optimizers.SGD(learning_rate=learning_rate),
